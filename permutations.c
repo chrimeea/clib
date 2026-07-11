@@ -2,9 +2,9 @@
 #include <stdlib.h>
 
 // print the array
-void output_array(int n, int *a)
+void output_array(unsigned n, unsigned *a)
 {
-	int i;
+	unsigned i;
 	for (i = 0; i < n; i++)
 	{
 		printf("%d ", a[i]);
@@ -13,9 +13,9 @@ void output_array(int n, int *a)
 }
 
 // print all the arrays and free the memory
-void output(int m, int n, int** p)
+void output(unsigned m, unsigned n, unsigned **p)
 {
-	int i, j;
+	unsigned i, j;
 	for (i = 0; i < m; i++)
 	{
 		output_array(n, p[i]);
@@ -24,9 +24,9 @@ void output(int m, int n, int** p)
 	free(p);
 }
 
-int factorial(int n)
+unsigned factorial(unsigned n)
 {
-	int i, f;
+	unsigned int i, f;
 	f = 1;
 	for (i = 2; i <= n; i++)
 	{
@@ -36,9 +36,9 @@ int factorial(int n)
 }
 
 // remove element at index j from array a
-int* eliminate(int n, int j, int* a)
+unsigned* eliminate(unsigned n, unsigned j, unsigned *a)
 {
-	int i, *b;
+	unsigned int i, *b;
 	b = malloc((n - 1) * sizeof(int));
 	for (i = 0; i < j; i++)
 	{
@@ -52,9 +52,9 @@ int* eliminate(int n, int j, int* a)
 }
 
 // insert x at every position in a
-int** combine(int n, int x, int* a)
+unsigned** combine(unsigned n, unsigned x, unsigned *a)
 {
-	int i, j, **b;
+	unsigned i, j, **b;
 	b = malloc(n * sizeof(int*));
 	for (i = 0; i < n; i++)
 	{
@@ -72,9 +72,9 @@ int** combine(int n, int x, int* a)
 	return b;
 }
 
-int** permutations(int m, int n, int* a)
+unsigned** permutations(unsigned m, unsigned n, unsigned *a)
 {
-	int i, j, elem, k, t, w, **c, **d, **e;
+	unsigned i, j, elem, k, t, w, **c, **d, **e;
 	if (n <= 0)
 	{
 		return NULL;
@@ -110,8 +110,7 @@ int** permutations(int m, int n, int* a)
 
 int main(int argc, char **argv)
 {
-	int i, n, m;
-	int* a;
+	unsigned i, n, m, *a;
 	if (argc == 2)
 	{
 		n = atoi(argv[1]);
@@ -127,5 +126,3 @@ int main(int argc, char **argv)
 		}
 	}
 }
-
-//TODO: use unsigned int
