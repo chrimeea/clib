@@ -35,22 +35,6 @@ unsigned factorial(unsigned n)
 	return f;
 }
 
-// remove element at index j from array a
-unsigned* eliminate(unsigned n, unsigned j, unsigned *a)
-{
-	unsigned int i, *b;
-	b = malloc((n - 1) * sizeof(int));
-	for (i = 0; i < j; i++)
-	{
-		b[i] = a[i];
-	}
-	for (i = j + 1; i < n; i++)
-	{
-		b[i - 1] = a[i];
-	}
-	return b;
-}
-
 // insert x at every position in a
 unsigned** combine(unsigned n, unsigned x, unsigned *a)
 {
@@ -90,8 +74,8 @@ unsigned** permutations(unsigned m, unsigned n, unsigned *a)
 		e = malloc(m * sizeof(int*));
 		k = 0;
 		t = m / n;
-		elem = a[0];
-		c = permutations(t, n - 1, eliminate(n, 0, a));
+		elem = a[n - 1];
+		c = permutations(t, n - 1, a);
 		for (i = 0; i < t; i++)
 		{
 			d = combine(n, elem, c[i]);
@@ -100,7 +84,6 @@ unsigned** permutations(unsigned m, unsigned n, unsigned *a)
 				e[k++] = d[j];
 			}
 		}
-		free(a);
 		return e;
 	}
 }
@@ -120,6 +103,7 @@ int main(int argc, char **argv)
 			}
 			m = factorial(n);
 			output(m, n, permutations(m, n, a));
+			free(a);
 		}
 	}
 }
