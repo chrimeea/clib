@@ -74,7 +74,7 @@ unsigned** combine(unsigned n, unsigned x, unsigned *a)
 
 unsigned** permutations(unsigned m, unsigned n, unsigned *a)
 {
-	unsigned i, j, elem, k, t, w, **c, **d, **e;
+	unsigned i, j, elem, k, t, **c, **d, **e;
 	if (n <= 0)
 	{
 		return NULL;
@@ -88,7 +88,7 @@ unsigned** permutations(unsigned m, unsigned n, unsigned *a)
 	else
 	{
 		e = malloc(m * sizeof(int*));
-		w = 0;
+		k = 0;
 		t = m / n;
 		elem = a[0];
 		c = permutations(t, n - 1, eliminate(n, 0, a));
@@ -97,7 +97,7 @@ unsigned** permutations(unsigned m, unsigned n, unsigned *a)
 			d = combine(n, elem, c[i]);
 			for (j = 0; j < n; j++)
 			{
-				e[w++] = d[j];
+				e[k++] = d[j];
 			}
 		}
 		free(a);
