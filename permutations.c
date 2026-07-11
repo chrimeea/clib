@@ -78,6 +78,7 @@ unsigned** permutations(unsigned m, unsigned n, unsigned *a)
 				e[k++] = d[j];
 			}
 		}
+		free(c);
 		return e;
 	}
 }
