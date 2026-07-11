@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 // print the array
 void output_array(unsigned n, unsigned *a)
@@ -35,23 +36,17 @@ unsigned factorial(unsigned n)
 	return f;
 }
 
-// insert x at every position in a
-unsigned** combine(unsigned n, unsigned x, unsigned *a)
+// insert e at every position in a
+unsigned** combine(unsigned n, unsigned e, unsigned *a)
 {
 	unsigned i, j, **b;
 	b = malloc(n * sizeof(int*));
 	for (i = 0; i < n; i++)
 	{
 		b[i] = malloc(n * sizeof(int));
-		for (j = 0; j < i; j++)
-		{
-			b[i][j] = a[j];
-		}
-		b[i][i] = x;
-		for (j = i + 1; j < n; j++)
-		{
-			b[i][j] = a[j - 1];
-		}
+		b[i][i] = e;
+		memcpy(b[i], a, i * sizeof(int));
+		memcpy(&b[i][i + 1], &a[i], (n - i - 1) * sizeof(int));
 	}
 	return b;
 }
