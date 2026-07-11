@@ -26,7 +26,7 @@ void output(unsigned m, unsigned n, unsigned **p)
 
 unsigned factorial(unsigned n)
 {
-	unsigned int i, f;
+	unsigned i, f;
 	f = 1;
 	for (i = 2; i <= n; i++)
 	{
@@ -90,17 +90,14 @@ unsigned** permutations(unsigned m, unsigned n, unsigned *a)
 		e = malloc(m * sizeof(int*));
 		w = 0;
 		t = m / n;
-		for (i = 0; i < n; i++)
+		elem = a[0];
+		c = permutations(t, n - 1, eliminate(n, 0, a));
+		for (i = 0; i < t; i++)
 		{
-			elem = a[i];
-			c = permutations(t, n - 1, eliminate(n, i, a));
-			for (j = 0; j < t; j++)
+			d = combine(n, elem, c[i]);
+			for (j = 0; j < n; j++)
 			{
-				d = combine(n, elem, c[j]);
-				for (k = 0; k < n; k++)
-				{
-					e[w++] = d[k];
-				}
+				e[w++] = d[j];
 			}
 		}
 		free(a);
