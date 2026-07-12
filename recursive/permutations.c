@@ -3,9 +3,9 @@
 #include <string.h>
 
 // print the array
-void output_array(unsigned n, unsigned *a)
+void output_array(int n, unsigned *a)
 {
-	unsigned i;
+	int i;
 	for (i = 0; i < n; i++)
 	{
 		printf("%d ", a[i]);
@@ -14,9 +14,9 @@ void output_array(unsigned n, unsigned *a)
 }
 
 // print all the arrays and free the memory
-void output(unsigned m, unsigned n, unsigned **p)
+void output(int m, int n, unsigned **p)
 {
-	unsigned i, j;
+	int i, j;
 	for (i = 0; i < m; i++)
 	{
 		output_array(n, p[i]);
@@ -25,9 +25,9 @@ void output(unsigned m, unsigned n, unsigned **p)
 	free(p);
 }
 
-unsigned factorial(unsigned n)
+int factorial(int n)
 {
-	unsigned i, f;
+	int i, f;
 	f = 1;
 	for (i = 2; i <= n; i++)
 	{
@@ -37,9 +37,10 @@ unsigned factorial(unsigned n)
 }
 
 // insert e at every position in a
-unsigned** combine(unsigned n, unsigned e, unsigned *a)
+unsigned** combine(int n, unsigned e, unsigned *a)
 {
-	unsigned i, j, **b;
+	int i, j;
+	unsigned **b;
 	b = malloc(n * sizeof(int*));
 	for (i = 0; i < n; i++)
 	{
@@ -51,9 +52,10 @@ unsigned** combine(unsigned n, unsigned e, unsigned *a)
 	return b;
 }
 
-unsigned** permutations(unsigned m, unsigned n, unsigned *a)
+unsigned** permutations(int m, int n, unsigned *a)
 {
-	unsigned i, j, k, t, **c, **d, **e;
+	int i, j, k, t;
+	unsigned **c, **d, **e;
 	if (n <= 0)
 	{
 		return NULL;
@@ -83,9 +85,10 @@ unsigned** permutations(unsigned m, unsigned n, unsigned *a)
 	}
 }
 
-int main(int argc, char **argv)
+void main(int argc, char **argv)
 {
-	unsigned i, n, m, *a;
+	int i, n, m;
+	unsigned *a;
 	if (argc == 2)
 	{
 		n = atoi(argv[1]);
