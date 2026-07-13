@@ -36,40 +36,68 @@ unsigned next_value(int n, unsigned e, unsigned *a)
 	return e;
 }
 
-void permutations(int n)
+void combinations(int n, int k)
 {
-	int k;
-	unsigned a[n];
-	k = 0;
+	int i;
+	unsigned a[k];
+	i = 0;
 	a[0] = 0;
-	while (k >= 0)
+	while (i >= 0)
 	{
-		a[k] = next_value(k, a[k], a);
-		if (a[k] > n)
+		a[i] = next_value(i, a[i], a);
+		if (a[i] > n)
 		{
-			k--;
+			i--;
 		}
-		else if (k < n - 1)
+		else if (i < k - 1)
 		{
-			a[++k] = 0;
+			a[++i] = 0;
 		}
 		else
 		{
-			output_array(n, a);
-			k--;
+			output_array(k, a);
+			if (n == k)
+			{
+				// optimization for permutations
+				i--;
+			}
 		}
 	}
 }
 
+void arrangements(int n)
+{
+	int i;
+	for (i = 1; i <= n; i++)
+	{
+		combinations(n, i);
+	}
+}
+
+void permutations(int n)
+{
+	combinations(n, n);
+}
+
 void main(int argc, char **argv)
 {
-	int n;
+	int n, m;
 	if (argc == 2)
 	{
 		n = atoi(argv[1]);
 		if (n > 0)
 		{
 			permutations(n);
+			// arrangements(n);
+		}
+	}
+	else if (argc == 3)
+	{
+		n = atoi(argv[1]);
+		m = atoi(argv[2]);
+		if (n >= m && m > 0)
+		{
+			combinations(n, m);
 		}
 	}
 }
