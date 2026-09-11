@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 // print the array
-void output_array(int n, unsigned *a)
+void output_array(long n, unsigned *a)
 {
-	int i;
+	long i;
 	for (i = 0; i < n; i++)
 	{
 		printf("%d ", a[i]);
@@ -14,9 +15,9 @@ void output_array(int n, unsigned *a)
 }
 
 // print all the arrays and free the memory
-void output(int m, int n, unsigned **p)
+void output(long m, int n, unsigned **p)
 {
-	int i, j;
+	long i;
 	for (i = 0; i < m; i++)
 	{
 		output_array(n, p[i]);
@@ -25,10 +26,10 @@ void output(int m, int n, unsigned **p)
 	free(p);
 }
 
-int factorial(int n)
+long factorial(int n)
 {
-	int i, f;
-	f = 1;
+	int i;
+	long f = 1;
 	for (i = 2; i <= n; i++)
 	{
 		f *= i;
@@ -37,9 +38,9 @@ int factorial(int n)
 }
 
 // insert e at every position in a
-unsigned** combine(int n, unsigned e, unsigned *a)
+unsigned** combine(long n, unsigned e, unsigned *a)
 {
-	int i, j;
+	long i;
 	unsigned **b;
 	b = malloc(n * sizeof(int*));
 	for (i = 0; i < n; i++)
@@ -52,9 +53,9 @@ unsigned** combine(int n, unsigned e, unsigned *a)
 	return b;
 }
 
-unsigned** permutations(int m, int n, unsigned *a)
+unsigned** permutations(long m, long n, unsigned *a)
 {
-	int i, j, k, t;
+	long i, j, k, t;
 	unsigned **c, **d, **e;
 	if (n <= 0)
 	{
@@ -87,26 +88,43 @@ unsigned** permutations(int m, int n, unsigned *a)
 
 void main(int argc, char **argv)
 {
-	int i, n, m;
+	int i, n, opt, c = 2;
+	long m;
 	unsigned *a;
-	if (argc == 2)
+	while ((opt = getopt(argc, argv, "fp")) != -1) {
+		switch (opt) {
+			case 'f':
+				c = 1; // factorial
+				break;
+			case 'p':
+				c = 2; // permutations
+				break;
+			default:
+				fprintf(stderr, "Usage: %s [-f][-p] n\n", argv[0]);
+				exit(EXIT_FAILURE);
+		}
+	}
+	if (optind >= argc) {
+		fprintf(stderr, "Missing argument n\n");
+		exit(EXIT_FAILURE);
+	}
+	n = atoi(argv[optind]);
+	if (n > 0)
 	{
-		n = atoi(argv[1]);
-		if (n > 0)
+		a = malloc(n * sizeof(int));
+		for (i = 0; i < n; i++)
 		{
-			a = malloc(n * sizeof(int));
-			for (i = 0; i < n; i++)
-			{
-				a[i] = i + 1;
-			}
-			m = factorial(n);
+			a[i] = i + 1;
+		}
+		m = factorial(n);
+		if (c == 1)
+		{
+			printf("%d\n", m);
+		} else {
 			output(m, n, permutations(m, n, a));
 			if (n > 1) {
 				free(a);
 			}
 		}
-	} else {
-		fprintf(stderr, "Usage: %s n\n", argv[0]);
-		exit(EXIT_FAILURE);
 	}
 }
