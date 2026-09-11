@@ -1,2 +1,3 @@
-recursive/permutations.c: recursive permutations
-backtracking/permutations.c: permutations, combinations, arrangements
+recursive/permutations.c: recursive permutations, recursive factorial
+backtracking/combinations.c: permutations, combinations, arrangements
+
