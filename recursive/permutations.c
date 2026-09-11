@@ -101,7 +101,10 @@ void main(int argc, char **argv)
 			}
 			m = factorial(n);
 			output(m, n, permutations(m, n, a));
-			free(a);
+			//free(a); // doesn't work for n = 1
 		}
+	} else {
+		fprintf(stderr, "Usage: %s n\n", argv[0]);
+		exit(EXIT_FAILURE);
 	}
 }
