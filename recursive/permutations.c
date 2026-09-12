@@ -93,16 +93,19 @@ void main(int argc, char **argv)
   unsigned *a;
   while ((opt = getopt(argc, argv, "fp")) != -1)
     {
-      switch (opt) {
-      case 'f':
-	c = 1; // factorial
-	break;
-      case 'p':
-	c = 2; // permutations
-	break;
-      default:
-	fprintf(stderr, "Usage: %s [-f][-p] n\n", argv[0]);
-	exit(EXIT_FAILURE);
+      switch (opt)
+	{
+	case 'f':
+	  c = 1; // factorial
+	  break;
+	case 'p':
+	  c = 2; // permutations
+	  break;
+	default:
+	  fprintf(stderr, "Usage: %s [-f][-p] n\n", argv[0]);
+	  fprintf(stderr, "%4s%s\n", "-f", "  factorial");
+	  fprintf(stderr, "%4s%s\n", "-p", "  permutations");
+	  exit(EXIT_FAILURE);
       }
     }
   if (optind >= argc)
