@@ -99,6 +99,9 @@ void main(int argc, char **argv)
 	  break;
 	default:
 	  fprintf(stderr, "Usage: %s [-p][-a][-c] n [k]\n", argv[0]);
+	  fprintf(stderr, "%4s%s\n", "-p", "  permutations");
+	  fprintf(stderr, "%4s%s\n", "-a", "  arrangements");
+	  fprintf(stderr, "%4s%s\n", "-c", "  combinations");
 	  exit(EXIT_FAILURE);
 	}
     }
